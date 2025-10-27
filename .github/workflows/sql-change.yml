@@ -1,0 +1,21 @@
+name: SQL Change Detector
+
+on:
+  push:
+    paths:
+      - 'database/**/*.sql'
+    branches:
+      - main
+
+jobs:
+  detect-sql-change:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Log SQL changes
+        run: |
+          echo "🔔 SQL file(s) changed in commit:"
+          git diff --name-only HEAD~1 HEAD | grep '.sql' || echo "No SQL changes detected"
