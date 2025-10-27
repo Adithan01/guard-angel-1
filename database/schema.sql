@@ -1,1 +1,2 @@
 --initial schema
+-- Added users table
